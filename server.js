@@ -18,6 +18,10 @@ wss.on('connection', (ws) => {
             const data = JSON.parse(message);
             
             switch(data.type) {
+                case 'ping':
+                    ws.send(JSON.stringify({ type: 'pong' }));
+                    break;
+
                 case 'join':
                     clientRoom = data.room;
                     clientId = data.id;
